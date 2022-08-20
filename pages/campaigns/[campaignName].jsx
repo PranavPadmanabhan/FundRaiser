@@ -34,6 +34,16 @@ const Campaign = () => {
           </div>
           
       </div>
+      <div className="w-[100%] flex items-center justify-center px-2">
+        <div className="flex flex-col w-[45%] items-start justify-start">
+          <span className="text-white font-bold text-[4vw] sm:text-[2vw] lg:text-[1.3vw] ml-1">Required Amount</span>
+          <div className="flex items-center justify-center w-[90%] h-[15%] lg:h-[12%] min-h-[45px] bg-[#464646] rounded-[10px] my-[2%] px-3 placeholder:text-gray-500" >100 Matic</div>
+        </div>
+        <div className="flex flex-col w-[45%] items-start justify-start">
+          <span className="text-white font-bold text-[4vw] sm:text-[2vw] lg:text-[1.3vw] ml-1">Recieved Amount</span>
+          <div className="flex items-center justify-center w-[90%] h-[15%] lg:h-[12%] min-h-[45px] bg-[#464646] rounded-[10px] my-[2%] px-3 placeholder:text-gray-500 " >10 Matic</div>
+        </div>
+      </div>
     </div>
   </div>
   )
