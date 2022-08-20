@@ -13,7 +13,7 @@ const Campaign = () => {
   
 
   return (
-    <div className='w-screen flex flex-col items-center justify-start h-screen bg-black box-border pt-[30%] sm:pt-0 lg:pt-[5%] scrollbar-hide'>
+    <div className='w-screen flex flex-col sm:flex-row lg:flex-row items-center justify-start h-screen bg-black box-border pt-[30%] sm:pt-0 lg:pt-[5%] scrollbar-hide'>
     <Head>
       <title>Campaign</title>
       <meta name="description" content="All campaigns" />
