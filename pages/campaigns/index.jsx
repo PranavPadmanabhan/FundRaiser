@@ -5,7 +5,7 @@ import CreateCampaign from '../../components/CreateCampaign'
 import { navBarContext } from '../../components/NavBar'
 import Dashboard from '../../components/Dashboard';
 
-const index = () => {
+const Index = () => {
 
   const { currentTab, setcurrentTab, setHide } = useContext(navBarContext)
 
@@ -41,4 +41,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index

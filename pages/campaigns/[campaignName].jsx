@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React, { useContext, useEffect } from 'react'
 import { navBarContext } from '../../components/NavBar'
 
-const index = () => {
+const Campaign = () => {
 
   const { currentTab, setcurrentTab, setHide } = useContext(navBarContext)
 
@@ -22,4 +22,4 @@ const index = () => {
   </div>
   )
 }
-export default index
+export default Campaign
