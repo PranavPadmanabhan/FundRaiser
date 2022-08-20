@@ -1,11 +1,22 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 import GradientButton from '../components/GradientButton'
+import { navBarContext } from '../components/NavBar'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
 
   const router = useRouter()
+
+  const { currentTab, setcurrentTab, setHide } = useContext(navBarContext)
+
+
+  useEffect(() => {
+    setHide(true)
+  }, [])
+  
+
 
   return (
     <div className='relative w-screen h-screen flex flex-col items-start justify-start bg-black pt-[20%] sm:pt-[15%] lg:pt-[10%] box-border'>

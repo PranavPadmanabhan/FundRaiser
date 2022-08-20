@@ -25,7 +25,7 @@ const NavBar = ({activeTab, setcurrentTab, hide}) => {
     
 
     return (
-        <header className={` fixed flex z-[1000] top-0 bg-black items-center justify-center lg:justify-end w-screen h-[15%] lg:h-[10%] pr-0 lg:pr-5 border-2 border-white`}>
+        <header className={` fixed flex z-[1000] top-0 bg-black items-center justify-center lg:justify-end w-screen h-[15%] lg:h-[10%] pr-0 lg:pr-5 `}>
             <div className={`${hide?'hidden':'flex'} items-end sm:items-center lg:items-center justify-between  lg:justify-evenly w-[95%] lg:w-[65%] h-[100%]`}>
                 <div onClick={() => setcurrentTab('campaigns')} className=" relative flex flex-col items-center justify-center w-[30%] lg:w-[20%] h-[35%] lg:h-[100%] cursor-pointer">
                     <span className="text-white">Campaigns</span>
