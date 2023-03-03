@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import React, { useContext, useEffect, useState } from "react";
+import { ImSpinner2 } from "react-icons/im";
 import { useAccount } from "wagmi";
 import GradientButton from "../../components/GradientButton";
 import NavBarContextProvider, { navBarContext } from "../../components/NavBar";
@@ -22,15 +23,14 @@ const Campaign = ({ campaignId }) => {
 
   const getCampaign = async () => {
     try {
-      setLoading(true);
       const { contract } = await getContract();
       const data = await contract.getCampaign(campaignId);
-      const allDonation = await contract.getDonation(campaignId);
-      setCampaign(campaign);
+      console.log(data.toString())
+      const allDonation = await contract.getDonations(campaignId);
+      setCampaign(data);
       setDonations(allDonation);
       setLoading(false);
     } catch (error) {
-      setLoading(false);
     }
   };
 
@@ -45,9 +45,11 @@ const Campaign = ({ campaignId }) => {
         const receipt = await tx.wait(1);
         if (receipt) {
           setLoading(false);
+        setAmount("")
         }
       } catch (error) {
         setLoading(false);
+        setAmount("")
       }
     }
   };
@@ -134,7 +136,7 @@ const Campaign = ({ campaignId }) => {
       <NavBarContextProvider />
       <div className="w-[100%] h-[100%] p-[40px] flex flex-row items-center justify-center">
         <img
-          src="/Assets/campaign.png"
+          src={campaign?.image?`https://gateway.ipfscdn.io/ipfs/${campaign?.image?.toString()}`:"/Assets/campaign.png"}
           alt=""
           className="w-[35%] h-[100%]  rounded-[20px]"
         />
@@ -144,22 +146,35 @@ const Campaign = ({ campaignId }) => {
           </h1>
           <div className="w-[100%] h-[100%] flex flex-col items-center justify-start   ">
             {isConnected &&
-            address?.toLowerCase() ===
-              campaign?.creator?.toString().toLowerCase() ? (
+            (address?.toLowerCase() === campaign?.creator?.toString().toLowerCase())? (
               <div className="w-[90%] h-[20%] flex items-start justify-start px-7 mt-[40px] -ml-[50px] ">
                 <GradientButton
-                  title={"Cancel"}
+                  title={campaign?.state?.toString() ==="0"?"Cancel":"Cancelled"}
                   className={
                     "w-[45%] h-[40px]  bg-gradient-to-r from-[#DA29E4] to-[#05B5E6] mt-2 ml-4 mr-3"
                   }
-                  onClick={cancel}
+                  onClick={() => {
+                    if(campaign?.state?.toString() ==="0"){
+                      cancel()
+                    }
+                    else {
+                      return null
+                    }
+                  }}
                 />
                 <GradientButton
                   title={"Withdraw"}
                   className={
                     "w-[45%] h-[40px]  bg-gradient-to-r from-[#DA29E4] to-[#05B5E6] mt-2 ml-4"
                   }
-                  onClick={withdraw}
+                  onClick={() => {
+                    if(ethers.utils.formatEther(campaign?.balance?.toString()) !=="0"){
+                      withdraw()
+                    }
+                    else {
+                      return null
+                    }
+                  }}
                 />
               </div>
             ) : (
@@ -256,7 +271,7 @@ const Campaign = ({ campaignId }) => {
                   {donations.map((item, i) => (
                     <div
                       key={i}
-                      className=" w-[90%] h-[50px] bg-[#464646] rounded-[10px] my-2 flex flex-row items-center justify-between px-[20px] "
+                      className=" w-[95%] h-[50px] bg-[#464646] rounded-[10px] my-2 flex flex-row items-center justify-between px-[20px] "
                     >
                       <h1 className="font-Inter text-white">{`0x..${item?.donator
                         .toString()
@@ -266,7 +281,7 @@ const Campaign = ({ campaignId }) => {
                         )}`}</h1>
                       <h1 className="font-Inter text-white">
                         {item?.amount
-                          ? ethers.utils.formatEther(item?.amount?.toString())
+                          ? `${ethers.utils.formatEther(item?.amount?.toString())} ETH`
                           : null}
                       </h1>
                     </div>
@@ -292,6 +307,16 @@ const Campaign = ({ campaignId }) => {
       </div> */}
         </div>
       </div>
+      {
+        loading && (
+          <div className="fixed top-0 w-screen h-screen bg-[rgba(0,0,0,0.5)] text-white backdrop-blur-[20px] flex items-center justify-center">
+             <div className="relative w-[35vw] h-[27vh] rounded-[15px] border-[1px] border-[rgba(255,255,255,0.5)] flex flex-col items-center justify-center">
+              <ImSpinner2 size={90} color="white" className="animate-rotate " />
+              <h1 className="mt-2 text-white text-[25px]">Loading...</h1>
+             </div>
+          </div>
+        )
+      }
     </div>
   );
 };

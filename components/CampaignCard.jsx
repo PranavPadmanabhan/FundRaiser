@@ -10,7 +10,7 @@ const CampaignCard = ({image,title, amount, date,onClick,buttonTitle}) => {
             <h1 className="text-white my-1 text-[4vw] sm:text-[2vw] lg:text-[1.2vw] pt-3  text-center font-bold font-Inter">{title}</h1>
             <div className="flex items-center justify-start w-[100%] h-[10%] pl-[5%] my-1">
                 <img src="/Assets/save-money.png" alt="" className="w-[10%] " />
-                <span className="text-white  ml-2 text-[3.2vw] sm:text-[2vw] lg:text-[1vw] text-center font-bold font-Inter">{amount}</span>
+                <span className="text-white  ml-2 text-[3.2vw] sm:text-[2vw] lg:text-[1vw] text-center font-bold font-Inter">{amount} ETH</span>
             </div>
             <div className="flex items-center justify-start w-[100%] h-[10%] pl-[5%]">
                 <img src="/Assets/calendar.png" alt="" className="w-[10%]" />

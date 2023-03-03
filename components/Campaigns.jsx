@@ -55,9 +55,12 @@ const Campaigns = () => {
   return (
     <div className={` grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 place-content-start lg:place-content-start  place-items-center w-[85%] gap-y-8 min-h-screen bg-black scrollbar-hide -mt-[30px] sm:pt-[5%] lg:pt-[1px]`}>
       {
-        campaigns.map((item,i) => (
-          <CampaignCard key={i} image={`https://gateway.ipfscdn.io/ipfs/${item?.image?.toString()}`} amount={ethers.utils.formatEther(item?.target?.toString()).toString()} title={item?.description?.toString()} date={'17/12/2022'} buttonTitle={'Go to Campaign'} onClick={() => router.push(`/campaigns/${item?.id?.toString()}`)}/>
-        ))
+        campaigns.map((item,i) => {
+          const date = new Date(parseInt(item?.deadline?.toString()))
+          return (
+            <CampaignCard key={i} image={`https://gateway.ipfscdn.io/ipfs/${item?.image?.toString()}`} amount={ethers.utils.formatEther(item?.target?.toString()).toString()} title={item?.description?.toString()} date={`${date.getDate()<10?"0"+date.getDate():date.getDate()}/${date.getMonth()<10?"0"+date.getMonth():date.getMonth()}/${date.getFullYear()}`} buttonTitle={'Go to Campaign'} onClick={() => router.push(`/campaigns/${item?.id?.toString()}`)}/>
+          )
+        })
       }
       {
         campaigns.length == 0&&<h1 className='fixed  top-1/2 left-[45%] m-auto text-white font-bold'>No Campaigns</h1>

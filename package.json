@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^0.11.0",
+    "@thirdweb-dev/react": "^3.9.5",
+    "@thirdweb-dev/sdk": "^3.9.5",
+    "@thirdweb-dev/storage": "^1.0.10",
     "ethers": "^5.7.2",
     "next": "12.2.5",
     "react": "18.2.0",

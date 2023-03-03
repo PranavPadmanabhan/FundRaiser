@@ -5,6 +5,10 @@ const appContext = React.createContext({})
 const AppContextProvider = ({children}) => {
 
     const [navBarHidden, setNavBarHidden] = useState(false)
+
+
+
+
     const value = { navBarHidden, setNavBarHidden }
     return (
         <appContext.Provider value={value}>
