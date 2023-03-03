@@ -9,24 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/material": "^5.11.11",
-    "next": "12.2.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
-    "tailwind-scrollbar-hide": "^1.1.7"
-=======
     "@rainbow-me/rainbowkit": "^0.11.0",
     "ethers": "^5.7.2",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "wagmi": "^0.11.7"
->>>>>>> 33910a19fe783149a7b0ad6dc7c665393c40e759
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
