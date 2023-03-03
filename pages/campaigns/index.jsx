@@ -4,10 +4,12 @@ import Campaigns from '../../components/Campaigns'
 import CreateCampaign from '../../components/CreateCampaign'
 import { navBarContext } from '../../components/NavBar'
 import Dashboard from '../../components/Dashboard';
+import { useAppContext } from '../../contexts/appContext'
 
 const Index = () => {
 
   const { currentTab, setcurrentTab, setHide } = useContext(navBarContext)
+  const { setNavBarHidden } = useAppContext();
 
   const RenderTabs = () => {
       if(currentTab == 'createCampaign'){
@@ -20,6 +22,10 @@ const Index = () => {
         return (<Dashboard />)
       }
   }
+
+  useEffect(() => {
+    setNavBarHidden(false);
+  }, []);
 
 
   useEffect(() => {

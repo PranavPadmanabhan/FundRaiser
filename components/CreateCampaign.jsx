@@ -43,7 +43,6 @@ const CreateCampaign = () => {
         }
       } catch (error) {
         setLoading(false);
-        alert("Transaction Failed")
       }
     }
     else {

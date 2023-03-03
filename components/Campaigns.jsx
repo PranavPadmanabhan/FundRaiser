@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { getContract } from '../utils/helper-functions';
 import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
+import { ImSpinner2 } from 'react-icons/im';
 
 const Campaigns = () => {
 
@@ -64,6 +65,16 @@ const Campaigns = () => {
       }
       {
         campaigns.length == 0&&<h1 className='fixed  top-1/2 left-[45%] m-auto text-white font-bold'>No Campaigns</h1>
+      }
+       {
+        loading && (
+          <div className="fixed left-0 top-0 w-screen h-screen bg-[rgba(0,0,0,0.5)] text-white backdrop-blur-[20px] flex items-center justify-center">
+             <div className="relative w-full h-full rounded-[15px] flex flex-col items-center justify-center">
+              <ImSpinner2 size={70} color="white" className="animate-rotate " />
+              <h1 className="mt-2 text-white text-[25px]">Loading...</h1>
+             </div>
+          </div>
+        )
       }
     </div>
   )
