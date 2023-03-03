@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React from 'react'
 import GradientButton from './GradientButton'
 
@@ -39,4 +40,4 @@ const CreateCampaign = () => {
   )
 }
 
-export default CreateCampaign
+export default dynamic(() => Promise.resolve(CreateCampaign),{ssr:false});

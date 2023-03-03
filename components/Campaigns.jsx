@@ -3,6 +3,7 @@ import CampaignCard from './CampaignCard'
 import { useRouter } from 'next/router';
 import { getContract } from '../utils/helper-functions';
 import { ethers } from 'ethers';
+import dynamic from 'next/dynamic';
 
 const Campaigns = () => {
 
@@ -46,4 +47,4 @@ const Campaigns = () => {
   )
 }
 
-export default Campaigns
+export default dynamic(() => Promise.resolve(Campaigns),{ssr:false});

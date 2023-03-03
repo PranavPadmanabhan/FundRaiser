@@ -1,4 +1,5 @@
 import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useAppContext } from "../contexts/appContext";
@@ -102,4 +103,4 @@ export const NavBar = ({ activeTab, setcurrentTab, hide }) => {
   );
 };
 
-export default NavBarContextProvider;
+export default dynamic(() => Promise.resolve(NavBarContextProvider),{ssr:false});

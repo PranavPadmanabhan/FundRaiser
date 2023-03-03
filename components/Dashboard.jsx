@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 import { useAccount } from 'wagmi'
 import { getContract } from '../utils/helper-functions'
@@ -36,7 +37,7 @@ const Dashboard = () => {
     <div className='grid grid-cols-1 gap-y-8 sm:grid-cols-2  lg:grid-cols-3 place-content-start lg:place-content-center place-items-center w-[85%] min-h-screen bg-black scrollbar-hide pt-[20%] sm:pt-[5%] lg:pt-[24%]'>
          {
         campaigns.map((item,i) => (
-          <CampaignCard key={i} image={`https://gateway.ipfscdn.io/ipfs/${item?.image?.toString()}`} amount={ethers.utils.formatEther(item?.target?.toString()).toString()} title={item?.description?.toString()} date={'17/12/2022'} buttonTitle={'Go to Campaign'} onClick={() => {}}/>
+          <CampaignCard key={i} image={`https://gateway.ipfscdn.io/ipfs/${item?.image?.toString()}`} amount={ethers.utils.formatEther(item?.target?.toString()).toString()} title={item?.description?.toString()} date={'17/12/2022'} buttonTitle={'Go to Campaign'} onClick={() => router.push(`/campaigns/${item?.id?.toString()}`)}/>
         ))
       }
       {
@@ -46,4 +47,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default dynamic(() => Promise.resolve(Dashboard),{ssr:false});

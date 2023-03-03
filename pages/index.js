@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
@@ -7,7 +8,7 @@ import { navBarContext } from '../components/NavBar'
 import styles from '../styles/Home.module.css'
 
 
-export default function Home() {
+ function Home() {
 
   const router = useRouter()
 
@@ -51,3 +52,4 @@ export default function Home() {
     </div>
   )
 }
+export default dynamic(() => Promise.resolve(Home),{ssr:false});
