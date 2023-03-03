@@ -26,8 +26,26 @@ const Dashboard = () => {
   }
  }
 
+ const listenToCampaigns = async() => {
+  const { contract } = await getContract();
+  contract.on("NewCampaign",() => {
+    getCampaigns()
+  })
+
+}
+
+const listenToCancel = async() => {
+  const { contract } = await getContract();
+  contract.on("Cancelled",() => {
+    getCampaigns()
+  })
+
+}
+
  useEffect(() => {
   getCampaigns()
+  listenToCampaigns()
+  listenToCancel()
   return () => {
     setCampaigns([])
   }

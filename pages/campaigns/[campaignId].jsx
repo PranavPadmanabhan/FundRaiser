@@ -68,6 +68,31 @@ const Campaign = ({ campaignId }) => {
     }
   };
 
+  const listenToDonations = async() => {
+    const { contract } = await getContract();
+    contract.on("NewDonation",() => {
+      getCampaign()
+    })
+
+  }
+
+
+  const listenToCancel = async() => {
+    const { contract } = await getContract();
+    contract.on("Cancelled",() => {
+      getCampaign()
+    })
+
+  }
+
+  const listenToWithdraw = async() => {
+    const { contract } = await getContract();
+    contract.on("Withdraw",() => {
+      getCampaign()
+    })
+
+  }
+
   const withdraw = async () => {
     if (address) {
       try {
@@ -86,6 +111,9 @@ const Campaign = ({ campaignId }) => {
 
   useEffect(() => {
     getCampaign();
+    listenToDonations();
+    listenToCancel()
+    listenToWithdraw()
     return () => {
       setCampaign({});
       setDonations([]);
