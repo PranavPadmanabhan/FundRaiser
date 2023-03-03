@@ -1,6 +1,5 @@
-import React from "react";
-import GradientButton from "./GradientButton";
-import { IoIosArrowDown } from "react-icons/io";
+import React from 'react'
+import GradientButton from './GradientButton'
 
 const CreateCampaign = () => {
   // const button = document.getElementById("options-menu");
@@ -110,3 +109,5 @@ const CreateCampaign = () => {
 };
 
 export default CreateCampaign;
+
+export default CreateCampaign

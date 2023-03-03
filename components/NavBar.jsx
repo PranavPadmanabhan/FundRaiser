@@ -1,4 +1,8 @@
+import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
+import { useAppContext } from "../contexts/appContext";
 import GradientButton from "./GradientButton";
 
 export const navBarContext = React.createContext();
@@ -6,24 +10,31 @@ export const navBarContext = React.createContext();
 const NavBarContextProvider = (props) => {
   const [currentTab, setcurrentTab] = useState("campaigns");
   const [hide, setHide] = useState(false);
+  const { navBarHidden} = useAppContext()
   const value = {
     currentTab,
     setcurrentTab,
-    setHide,
+    setHide
   };
   return (
     <navBarContext.Provider value={value}>
-      <NavBar
+      {!navBarHidden && (
+        <NavBar
         activeTab={currentTab}
         setcurrentTab={setcurrentTab}
         hide={hide}
       />
+      )}
       {props.children}
     </navBarContext.Provider>
   );
 };
 
-const NavBar = ({ activeTab, setcurrentTab, hide }) => {
+export const NavBar = ({ activeTab, setcurrentTab, hide }) => {
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { isConnected, address } = useAccount();
+
   return (
     <header
       className={` fixed flex z-[1000] top-0 bg-black items-center justify-center ${
@@ -70,16 +81,26 @@ const NavBar = ({ activeTab, setcurrentTab, hide }) => {
           "w-[35%] fixed top-1 right-1 lg:relative sm:w-[25%] lg:w-[15%] h-[5%] min-h-[35px] sm:min-h-[40px] "
         }
       >
-        <GradientButton
-          title={"Connect Wallet"}
-          className={
-            "w-[100%] fixed top-1 right-1 lg:relative sm:w-[25%] lg:w-[100%] h-[5%] min-h-[35px] sm:min-h-[40px] bg-gradient-to-r from-[#DA29E4] to-[#05B5E6]"
-          }
-          onClick={null}
-        />
+        {isConnected && address ? (
+          <GradientButton
+            title={`0x..${address.slice(address.length-15,address.length)}`}
+            className={
+              "w-[100%] fixed top-1 right-1 lg:relative sm:w-[25%] lg:w-[100%] h-[5%] min-h-[35px] sm:min-h-[40px] bg-gradient-to-r from-[#DA29E4] to-[#05B5E6]"
+            }
+            onClick={openAccountModal}
+          />
+        ) : (
+          <GradientButton
+            title={"Connect Wallet"}
+            className={
+              "w-[100%] fixed top-1 right-1 lg:relative sm:w-[25%] lg:w-[100%] h-[5%] min-h-[35px] sm:min-h-[40px] bg-gradient-to-r from-[#DA29E4] to-[#05B5E6]"
+            }
+            onClick={openConnectModal}
+          />
+        )}
       </div>
     </header>
   );
 };
 
-export default NavBarContextProvider;
+export default dynamic(() => Promise.resolve(NavBarContextProvider),{ssr:false});
