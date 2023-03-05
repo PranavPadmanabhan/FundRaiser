@@ -28,7 +28,7 @@ const CreateCampaign = () => {
   const { mutateAsync: upload, isLoading, isSuccess } = useStorageUpload();
 
   const createCampaign = async () => {
-    if (address && name !== "" && description !== "" && imageHash !== ""  ) {
+    if (address && name !== "" && description !== "" && imageHash !== ""&& date !== "" && category !== "" ) {
       try {
         setLoading(true);
         const data = date.split("/",date.length)
