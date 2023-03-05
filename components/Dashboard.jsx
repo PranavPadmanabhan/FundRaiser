@@ -54,7 +54,7 @@ const listenToCancel = async() => {
  },[])
 
   return (
-    <div className={`relative grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 place-content-start lg:place-content-start  place-items-center w-[85%] gap-y-8 min-h-screen bg-black scrollbar-hide -mt-[30px] sm:pt-[5%] lg:pt-[1px]`}>
+    <div className={`relative grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 place-content-start lg:place-content-start  place-items-center w-[85%] gap-y-8 min-h-screen bg-black scrollbar-hide -mt-[30px] sm:pt-[5%] lg:pt-[1px]`}>
     {
       campaigns.map((item,i) => {
         const date = new Date(parseInt(item?.deadline?.toString()))
