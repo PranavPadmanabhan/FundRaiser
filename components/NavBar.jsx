@@ -44,7 +44,7 @@ export const NavBar = ({ activeTab, setcurrentTab, hide }) => {
       <div
         className={`${
           hide ? "hidden" : "flex"
-        } items-end sm:items-center lg:items-center justify-between ml-[330px] border-2 lg:justify-evenly w-[95%] lg:w-[55%] h-[100%]`}
+        } items-end sm:items-center lg:items-center justify-between ml-[330px] lg:justify-evenly w-[95%] lg:w-[55%] h-[100%]`}
       >
         <div
           onClick={() => setcurrentTab("campaigns")}
