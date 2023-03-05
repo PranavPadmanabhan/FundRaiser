@@ -32,7 +32,7 @@ const CreateCampaign = () => {
       try {
         setLoading(true);
         const data = date.split("/",date.length)
-        const time = new Date(`${data[2]}-${data[1]}-${data[0]}`)
+        const time = new Date(`${data[2]}-${data[1]<10?"0"+data[1]:data[1]}-${data[0]<10?"0"+data[0]:data[0]}`)
         const { contract } = await getContract(true);
         const tx = await contract.createCampaign(name,description,ethers.utils.parseEther(target),imageHash,time.getTime());
         const receipt = await tx.wait(1);
